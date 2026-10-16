@@ -250,10 +250,7 @@
 
   <!-- LOGIK JAVASCRIPT -->
   <script>
-    // =========================================================================
-    // PENTING: TAMPAL URL WEB APP GOOGLE APPS SCRIPT ANDA DI BAWAH
-    // Contoh: const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw8OdyCGuVnkzxXyld2nPTwhCiT5NRgEJY4z0LClONO47K4H-wQ7TzbXmap8vKvzsTTFA/exec";
-    // =========================================================================
+    // URL Web App Google Apps Script anda:
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw8OdyCGuVnkzxXyld2nPTwhCiT5NRgEJY4z0LClONO47K4H-wQ7TzbXmap8vKvzsTTFA/exec";
 
     const petunjukTP = {
@@ -281,19 +278,16 @@
         return;
       }
 
-      if (!WEB_APP_URL || WEB_APP_URL.includes("https://script.google.com/macros/s/AKfycbw8OdyCGuVnkzxXyld2nPTwhCiT5NRgEJY4z0LClONO47K4H-wQ7TzbXmap8vKvzsTTFA/exec")) {
-        showError("Cuba Sekali Lagi");
-        return;
-      }
-
       // Reset UI
       errorBox.classList.add("hidden");
       resultSection.classList.add("hidden");
       loadingBox.classList.remove("hidden");
 
       try {
-        // Panggil Google Apps Script Web App dengan parameter ?ic=
-        const response = await fetch(`${WEB_APP_URL}?ic=${encodeURIComponent(cleanIc)}`);
+        const response = await fetch(`${WEB_APP_URL}?ic=${encodeURIComponent(cleanIc)}`, {
+          method: "GET",
+          redirect: "follow"
+        });
         const result = await response.json();
 
         loadingBox.classList.add("hidden");
